@@ -73,4 +73,10 @@ public class ReporteIncendioController {
     public void deleteReporteIncendio(@PathVariable Long id) {
         reporteIncendioService.deleteById(id);
     }
+
+    //Obtener reportes de incendio agrupados por estado.
+    @GetMapping("/reporte-por-estado")
+    public List<Object[]> obtenerReportePorEstado() {
+        return reporteIncendioService.obtenerReportePorEstado();
+    }
 }
