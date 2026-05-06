@@ -34,14 +34,17 @@ public class UsuarioController {
 
     //Crear usuario. Se debe enviar el usuario en el cuerpo de la solicitud.
     //El cuerpo puede contener todos los campos del usuario, excepto el id.
-    //Los campos del reporte a ingresar son: rut, nombreCompleto, contacto yrol (CIUDADANO/BRIGADISTA/ADMINISTRADOR).
+    //Los campos de usuario a ingresar son: rut, nombreCompleto, contacto, rol (CIUDADANO/BRIGADISTA/ADMINISTRADOR) y (opcionalmente) el id de la brigada a la que pertenece.
     //Ejemplo de cuerpo de solicitud:
     /*
     {
         "rut": "12345678-9",
         "nombreCompleto": "Juan Alberto Pérez Soto",
         "contacto": "be.pintor@duocuc.cl y 930182210",
-        "rol": "BRIGADISTA"
+        "rol": "BRIGADISTA",
+        "brigada": {
+            "id": 1
+        }
     }
     */
     @PostMapping
