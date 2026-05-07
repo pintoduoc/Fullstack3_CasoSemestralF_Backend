@@ -37,7 +37,7 @@ public class ReporteIncendioService {
         reporteIncendioRepository.deleteById(id);
     }
 
-    public List<Object[]> obtenerReportePorEstado() {
-        return reporteIncendioRepository.obtenerEstadisticas();
+    public List<Object[]> obtenerReportesPorEstado() {
+        return reporteIncendioRepository.obtenerReportesPorEstado();
     }
 }

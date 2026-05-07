@@ -74,9 +74,9 @@ public class ReporteIncendioController {
         reporteIncendioService.deleteById(id);
     }
 
-    //Obtener reportes de incendio agrupados por estado.
-    @GetMapping("/reporte-por-estado")
-    public List<Object[]> obtenerReportePorEstado() {
-        return reporteIncendioService.obtenerReportePorEstado();
+    //Obtener todos los reportes de incendio agrupados por estado. (Ejemplo: /api/reporte-incendio/group-by-estado)
+    @GetMapping("/group-by-estado")
+    public List<Object[]> obtenerReportesPorEstado() {
+        return reporteIncendioService.obtenerReportesPorEstado();
     }
 }

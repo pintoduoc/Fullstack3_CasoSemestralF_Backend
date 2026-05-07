@@ -10,6 +10,6 @@ import java.util.List;
 public interface ReporteIncendioRepository extends JpaRepository<ReporteIncendio, Long> {
 	List<ReporteIncendio> findByEstado(ReporteIncendio.Estado estado);
 	List<ReporteIncendio> findByLatitudAndLongitud(Double latitud, Double longitud);
-	@Query(value = "CALL ObtenerEstadisticasHistoricas()", nativeQuery = true)
-	List<Object[]> obtenerEstadisticas();
+	@Query(value = "CALL ObtenerReportesPorEstado()", nativeQuery = true)
+	List<Object[]> obtenerReportesPorEstado();
 }

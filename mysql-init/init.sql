@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS db_usuarios;
 USE db_reportes;
 
 DELIMITER //
-CREATE PROCEDURE ObtenerEstadisticasHistoricas()
+CREATE PROCEDURE ObtenerReportesPorEstado()
 BEGIN
 SELECT estado, COUNT(*) as cantidad
 FROM reporte_incendio

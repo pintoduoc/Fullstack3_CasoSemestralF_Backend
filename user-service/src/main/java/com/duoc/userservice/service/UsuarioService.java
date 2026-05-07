@@ -25,6 +25,10 @@ public class UsuarioService {
         return usuarioRepository.findByRut(rut);
     }
 
+    public List<Usuario> findByRol(Usuario.Rol rol) {
+        return usuarioRepository.findByRol(rol);
+    }
+
     public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
