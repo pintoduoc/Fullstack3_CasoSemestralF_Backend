@@ -1,6 +1,0 @@
-com\duoc\reportservice\model\ReporteIncendio$Estado.class
-com\duoc\reportservice\repository\ReporteIncendioRepository.class
-com\duoc\reportservice\service\ReporteIncendioService.class
-com\duoc\reportservice\ReportServiceApplication.class
-com\duoc\reportservice\model\ReporteIncendio.class
-com\duoc\reportservice\controller\ReporteIncendioController.class

@@ -1,8 +1,0 @@
-com\duoc\alertservice\repository\AlertaEmergenciaRepository.class
-com\duoc\alertservice\model\AlertaEmergencia.class
-com\duoc\alertservice\AlertServiceApplication.class
-com\duoc\alertservice\dto\ReporteIncendioDTO.class
-com\duoc\alertservice\client\ReportClient.class
-com\duoc\alertservice\service\AlertaEmergenciaService.class
-com\duoc\alertservice\model\AlertaEmergencia$NivelRiesgo.class
-com\duoc\alertservice\controller\AlertaEmegenciaController.class
