@@ -9,11 +9,21 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
       </profile>
+      <profile name="Annotation profile for bff-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="bff-service" />
+      </profile>
       <profile name="Annotation profile for user-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="alert-service" />
@@ -26,6 +36,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="alert-service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
+      <module name="bff-service" options="-parameters" />
       <module name="report-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>

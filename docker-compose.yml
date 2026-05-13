@@ -1,45 +1,97 @@
 version: '3.8'
 
 services:
-  bd:
+  # Base de Datos MySQL Compartida (con esquemas separados lógicamente por Liquibase)
+  mysql-db:
     image: mysql:8.0
-    container_name: bd
+    container_name: valledelsol-mysql
+    restart: always
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # Coincide con tu application.properties actual
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_emergencias # Ajusta esto según el nombre que uses en tu init.sql
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./mysql-init:/docker-entrypoint-initdb.d # Ejecuta el script SQL al iniciar
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
 
+  # 1. Microservicio de Usuarios y Brigadas
+  user-service:
+    build:
+      context: ./user-service
+    container_name: user-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mysql-db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/db_emergencias?useSSL=false&allowPublicKeyRetrieval=true
+    networks:
+      - app-network
+
+  # 2. Microservicio de Reportes de Incendio
+  report-service:
+    build:
+      context: ./report-service
+    container_name: report-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql-db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/db_emergencias?useSSL=false&allowPublicKeyRetrieval=true
+    networks:
+      - app-network
+
+  # 3. Microservicio de Alertas
+  alert-service:
+    build:
+      context: ./alert-service
+    container_name: alert-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mysql-db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/db_emergencias?useSSL=false&allowPublicKeyRetrieval=true
+    networks:
+      - app-network
+
+  # 4. Backend For Frontend (Nuevo)
+  bff-service:
+    build:
+      context: ./bff-service
+    container_name: bff-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - user-service
+      - report-service
+      - alert-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - app-network
+
+  # 5. API Gateway (Punto de entrada único)
   api-gateway:
-    build: ./api-gateway
+    build:
+      context: ./api-gateway
     container_name: api-gateway
     ports:
       - "8080:8080"
     depends_on:
-      - report-service
       - user-service
-      - alert-service
-
-  report-service:
-    build: ./report-service
-    container_name: report-service
-    depends_on:
-      - bd
-
-  user-service:
-    build: ./user-service
-    container_name: user-service
-    depends_on:
-      - bd
-
-  alert-service:
-    build: ./alert-service
-    container_name: alert-service
-    depends_on:
-      - bd
       - report-service
+      - alert-service
+      - bff-service
+    networks:
+      - app-network
 
-volumes:
-  mysql_data:
+networks:
+  app-network:
+    driver: bridge
