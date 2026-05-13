@@ -26,9 +26,9 @@ public class UsuarioController {
         return usuarioService.findById(id);
     }
 
-    //Obtener usuario por rut. Se debe enviar el rut del usuario en la URL. (Ejemplo: /api/usuario/rut?rut=12345678-9)
-    @GetMapping("/rut")
-    public Usuario findByRut(@RequestParam String rut) {
+    //Obtener usuario por rut. Se debe enviar el rut del usuario en la URL. (Ejemplo: /api/usuario/rut/12345678-9)
+    @GetMapping("/rut/{rut}")
+    public Usuario findByRut(@PathVariable String rut) {
         return usuarioService.findByRut(rut);
     }
 
