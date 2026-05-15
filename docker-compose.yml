@@ -92,6 +92,19 @@ services:
     networks:
       - app-network
 
+  # 6. SERVICIO FRONTEND
+  frontend:
+    build:
+      # Ajusta el nombre de la carpeta según cómo clones el repositorio en tu EC2
+      context: ../Fullstack3_CasoSemestralF_Frontend
+    container_name: valledelsol-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
