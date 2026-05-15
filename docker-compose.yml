@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Base de Datos MySQL Compartida (con esquemas separados lógicamente por Liquibase)
   mysql-db:
